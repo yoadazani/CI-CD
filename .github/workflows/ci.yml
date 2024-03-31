@@ -2,7 +2,8 @@ name: Vite application
 
 on:
   push:
-      branches: [ "main" ]
+      branches:
+        - main
 
 jobs:
   build:
