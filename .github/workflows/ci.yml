@@ -7,11 +7,10 @@ on:
 
 jobs:
     build:
-        runs-on: ${{ matrix.os }}
+        runs-on: ubuntu-latest
 
         strategy:
           matrix:
-            os: ubuntu-latest
             node-version: [ 16.x, 18.x ]
             # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
@@ -33,11 +32,10 @@ jobs:
     deploy:
         needs: build
 
-        runs-on: ${{ matrix.os }}
+        runs-on: ubuntu-latest
 
         strategy:
           matrix:
-            os: ubuntu-latest
             node-version: [ 16.x, 18.x ]
             # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
