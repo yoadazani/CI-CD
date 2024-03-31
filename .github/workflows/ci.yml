@@ -34,6 +34,7 @@ jobs:
             with:
               name: production-files
               path: ./dist
+
     deploy:
         name: Deploy
         needs: build
@@ -47,8 +48,8 @@ jobs:
               name: production-files
               path: ./dist
 
-          - name: Deploy application
-            uses: JamesIves/github-pages-deploy-action@v4.3.3
+          - name: Deploy to GitHub Pages
+            uses: peaceiris/actions-gh-pages@v3
             with:
-              branch: CI/CD
-              folder: ./dist
+              github_token: ${{ secrets.GITHUB_TOKEN }}
+              publish_dir: ./dist
