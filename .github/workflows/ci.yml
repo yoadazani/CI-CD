@@ -5,36 +5,36 @@ on:
         branches: [ "main" ]
 
 jobs:
-  build:
-    runs-on: {{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest]
-        node-version: [ 16.x, 18.x ]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-        
-    steps:
-      - uses: actions/checkout@v3
+    build:
+        runs-on: {{ matrix.os }}
+        strategy:
+          matrix:
+            os: [ ubuntu-latest, windows-latest, macos-latest]
+            node-version: [ 16.x, 18.x ]
+            # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+        steps:
+          - uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: npm install
+          - name: Use Node.js ${{ matrix.node-version }}
+            uses: actions/setup-node@v3
+            with:
+              node-version: ${{ matrix.node-version }}
+              cache: 'npm'
 
-      - name: Build application
-        run: npm run build
+          - name: Install dependencies
+            run: npm install
 
-  deploy:
-    needs: build
+          - name: Build application
+            run: npm run build
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.VITE_APP_TOKEN}}
-          publish_dir: ./dist
+    deploy:
+        needs: build
+
+        steps:
+          - uses: actions/checkout@v3
+          - name: Deploy to GitHub Pages
+            uses: peaceiris/actions-gh-pages@v3
+            with:
+              github_token: ${{ secrets.VITE_APP_TOKEN}}
+              publish_dir: ./dist
