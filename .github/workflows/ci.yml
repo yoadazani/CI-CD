@@ -4,11 +4,6 @@ on:
     push:
         branches: [ "main" ]
 
-
-permissions:
-  contents: read
-  pages: write
-
 jobs:
     build:
         name: Build
@@ -19,6 +14,7 @@ jobs:
             node-version: [20.x]
 
         steps:
+          - name: Checkout
           - uses: actions/checkout@v3
 
           - name: Use Node.js ${{ matrix.node-version }}
